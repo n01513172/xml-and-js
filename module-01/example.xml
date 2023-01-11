@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<myMessage>
-  <subject>This is a welcome message</subject>
-  <date>Jan 31, 2018</date>
-</myMessage>
+<people>
+<person1>
+<name>
+<firstname>Sunitha</firstname>
+<lastname>korakandla</lastname>
+</name>
+<hobby>
+<hob1>reading</hob1>
+<hob2>playing</hob2>
+</hobby>
+<college1>Humber Institute</college1>
+<work>Anode</work>
+
+</person1>
+<person2>
+<name>
+<firstname>Manu</firstname>
+<lastname>Madupu</lastname>
+</name>
+<hobby>
+<hob1>singing</hob1>
+<hob2>dancing</hob2>
+</hobby>
+<college>School</college>
+<work>Anode</work>
+</person2>
+</people>
