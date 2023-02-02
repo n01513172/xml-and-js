@@ -1,0 +1,4 @@
+DTD, which stands for Document Type Definition, and XSD, which stands for XML Schema Definition, are used to convey data relevant to the features of XML data models with well-known industry standards and are regarded as essential components of XML. The schema of an XML document is defined by both of them. It is possible to define Document Type Definition (DTD) as a legal standard schema definition with an internal specification that aids in creating a document type for the SGML family.
+
+
+XSD also supports numeric, string and boolean data types. Languages code namespaces for clearly specified Schemas similarly to ISO. To prevent name clashes in the elements, XSD performs improvisation of DTD operations.
