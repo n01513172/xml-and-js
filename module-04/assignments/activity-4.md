@@ -4,6 +4,7 @@
 2. Create `module-4/assignments/activity-4.xsl` and link `module-4/assignments/activity-4.xml` to it
 3. Add 2 tables from description below
 4. Open `module-4/assignments/activity-4.xml` in browser (using `http-server`) and screenshot output of your file and save it as `module-4/assignments/activity-4.png`
+![image info]Activity-4.PNG
 
 ## Table 1
 
