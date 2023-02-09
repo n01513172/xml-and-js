@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <ol id="people"></ol>
+    <script>
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                displayData(this.responseXML);
+            }
+        };
+        xhttp.open("GET", "people.xml", true);
+        xhttp.send();
+        function stringToNode(html) {
+            const template = document.createElement(`template`);
+            html = html.trim();
+            template.innerHTML = html;
+            return template.content.firstChild;
+        }
+        function displayData(xmlDoc) {
+            const listElement = document.getElementById(`people`);
+            const studentNodes = xmlDoc.getElementsByTagName(`record`);
+            for (let index = 0; index < studentNodes.length; index++) {
+                const studentNode = studentNodes[index];
+                const listItem = stringToNode(`<li>
+            <h3>${`FullName: ${studentNode.getElementsByTagName(`first_name`)[0].childNodes[0]
+                        .nodeValue
+                    } ${studentNode.getElementsByTagName(`last_name`)[0].childNodes[0]
+                        .nodeValue
+                    }`}</h3>
+                    <p>${`Email: ${studentNode.getElementsByTagName(`email`)[0].childNodes[0].nodeValue
+                    }`}</p>
+          <p>${`Gender: ${studentNode.getElementsByTagName(`gender`)[0].childNodes[0].nodeValue
+                    }`}</p>
+                    <p>${`IP Address: ${studentNode.getElementsByTagName(`ip_address`)[0].childNodes[0].nodeValue
+                    }`}</p>
+          </li>`);
+                listElement.appendChild(listItem);
+            }
+        }
+    </script>
+</body>
+</html>
