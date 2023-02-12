@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    </head>
+    <body>
+        
+        <div id="customers"></div>
+        <script>
+
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200){
+                    const rootList = document.getElementById('customers');
+                    const customers = this.responseXML.getElementsByTagName('customer');
+
+                    for (let i=0; i<customers.length; i++){
+                        const customer = customers[i];
+                        const title = customer.getElementsByTagName('name')[0].getAttribute('title');
+                        const name = title + " " + customer.getElementsByTagName('name')[0].childNodes[0].nodeValue;
+                        const address = customer.getElementsByTagName('address')[0].childNodes[0].nodeValue;
+                        const phone = customer.getElementsByTagName('phone')[0].childNodes[0].nodeValue;
+                        let email = '';
+                        if (customer.getElementsByTagName('email')[0]) {
+                            email = customer.getElementsByTagName('email')[0].childNodes[0].nodeValue;   
+                        }
+                        const ordersTable = createTable(customer.getElementsByTagName('order'));
+                        let customerDiv = `<div><h2>${name}</h2>
+                            <address>${address}</address>
+                            <a href="tel:+1 ${phone}" class="fa fa-phone">   ${phone}</a></br>`;
+                        if (email){
+                            customerDiv += `<a href="mailto:${email}" class="fa fa-envelope">   ${email}</a>`;
+                        }
+                        customerDiv += `${ordersTable}</div>`;
+                        customerDiv = stringToNode(customerDiv);
+                        rootList.appendChild(customerDiv);
+                    }
+                }
+            }
+            xhr.open("GET", "../customers.xml", true);
+            xhr.send();
+
+            function createTable(orders){
+                let html = `<table border="4"> 
+                                <tr bgcolor="#ff6347">
+                                    <th>Order ID</th>
+                                    <th>Order by</th>
+                                    <th>Order date</th>
+                                    <th>Items</th>
+                                </tr>`;
+                for (let i=0; i<orders.length; i++){
+                    const order = orders[i];
+                    const orderID = order.getAttribute('orderID');
+                    const orderBy = order.getAttribute('orderBy');
+                    const orderDate = order.getElementsByTagName('orderDate')[0].childNodes[0].nodeValue;
+                    const items = createItemsList(order.getElementsByTagName('item'));
+                    html += `<tr>
+                                <td>${orderID}</td>
+                                <td>${orderBy}</td>
+                                <td>${orderDate}</td>
+                                <td>${items}</td>
+                            </tr>`;
+                }
+
+                html += `</table>`;
+                return html;
+            }
+
+            function createItemsList(items){
+                let html = '<ol>';
+                for (let i=0; i<items.length; i++){
+                    const item = items[i];
+                    const itemPrice = item.getElementsByTagName('itemPrice')[0].childNodes[0].nodeValue;
+                    const itemQty = item.getElementsByTagName('itemQty')[0].childNodes[0].nodeValue;
+                    html += `<li>${itemPrice}</br>${itemQty} pc.</li>`;
+                }
+                html += '</ol>';
+                return html
+            }
+
+            function stringToNode(html) {
+                const temp = document.createElement('temp');
+                temp.innerHTML = html;
+                return temp.firstChild;
+            } 
+        </script>
+    </body>
+</html>
