@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="books" type="bookstype"/>
+    <xs:complexType name="bookstype">
+        <xs:sequence>
+            <xs:element name="record" type="recordType" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="recordType">
+        <xs:sequence>
+            <xs:element name="title" type="xs:string"/>        
+            <xs:element name="authors" type="authorsType" minOccurs="0" maxOccurs="unbounded"/>        
+            <xs:element name="year" type="xs:string"/>
+            <xs:element name="price" type="xs:decimal"/>
+            <xs:element name="category" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType  name="authorsType">
+        <xs:sequence>
+            <xs:element name="author" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
