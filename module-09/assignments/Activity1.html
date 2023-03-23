@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document </title>
+      </head>
+  <body>
+    <ol id="people"></ol>
+    <script>
+      const xhr = (url, method = `GET`) =>
+      new Promise ((resolve) => {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if (this.readyState === 4 && this.status ===200){
+                resolve(this);
+            }
+        };
+        xhttp.open (method, url);
+        xhttp.send()
+
+      });
+
+       ;
+
+        function stringToNode(html) {
+        const template = document.createElement(`template`);
+        html = html.trim();
+        template.innerHTML = html;
+        return template.content.firstChild;
+      }
+
+        function displayData(xmlDoc){
+            const listElement = document.getElementById(`people`);
+            //const xmlDoc = xml.responseXML;
+            //console.log(this)
+        const peopleNode = xmlDoc.getElementsByTagName(`person`);
+
+        for (let index = 0; index < peopleNode.length; index++) {
+          const personNode = peopleNode[index];
+
+          const listItem = stringToNode(`<li>
+          
+          <h2>${
+              personNode.getElementsByTagName(`first_name`)[0].childNodes[0]
+                .nodeValue
+            } ${
+            personNode.getElementsByTagName(`last_name`)[0].childNodes[0]
+              .nodeValue
+          }</h2>
+          <p>${personNode.getAttribute(`ID`)} - ${
+            personNode.getElementsByTagName(`email`)[0].childNodes[0]
+              .nodeValue
+          }</p>
+          <p>${`ipaddress: ${
+            personNode.getElementsByTagName(`ip_address`)[0].childNodes[0].nodeValue
+          }`}</p>
+          </li>`);
+          listElement.appendChild(listItem);
+        }
+      }
+
+     xhr("Activity.xml").then((data) => displayData(data.responseXML));
+
+
+      </script>
+
+  </body>
+</html>
