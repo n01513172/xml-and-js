@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <ol id="cust"></ol>
+    <script>
+      function stringToNode(html) {
+        const template = document.createElement(`template`);
+        html = html.trim();
+        template.innerHTML = html;
+        return template.content.firstChild;
+      }
+
+      function createCard(customer) {
+        const content = `<li>
+        <article>
+            <h2>Name: ${customer.name}</h2>
+            <h3>Address: ${customer.address}</h3>
+            <h3>Phone: ${customer.phone}</h3>
+            <p><i>Email: ${customer.email}</i></p>
+            <ul style="list-style-type:square;">
+                <h4>Orders</h4>
+                  <li><b>OrderId: ${customer.orderID}</b></li>
+                  <li><b>Order Date: ${customer.orderDate}</b></li>
+                  <li><b>Item Price: ${customer.itemPrice}</b></li>
+                  <li><b>Item Quantity: ${customer.itemQty}</b></li>
+            </ul>
+        </article>
+    </li>`;
+
+        return stringToNode(content);
+      }
+
+      function parseCard(xml) {
+        const name =
+          xml.getElementsByTagName(`name`)[0].childNodes[0].nodeValue;
+        const address =
+          xml.getElementsByTagName(`address`)[0].childNodes[0].nodeValue;
+        const phone =
+          xml.getElementsByTagName(`phone`)[0].childNodes[0].nodeValue;
+        var email = "";
+        if (xml.getElementsByTagName(`email`)[0] != null)
+          email = xml.getElementsByTagName(`email`)[0].childNodes[0].nodeValue;
+        else email = "NA";
+        const order =
+          xml.getElementsByTagName(`order`)[0].childNodes[0].nodeValue;
+        const orderDate =
+          xml.getElementsByTagName(`orderDate`)[0].childNodes[0].nodeValue;
+        const itemPrice =
+          xml.getElementsByTagName(`itemPrice`)[0].childNodes[0].nodeValue;
+        const itemQty =
+          xml.getElementsByTagName(`itemQty`)[0].childNodes[0].nodeValue;
+
+        return {
+          name,
+          address,
+          phone,
+          email,
+          order,
+          orderDate,
+          itemPrice,
+          itemQty,
+        };
+      }
+
+      function displayData(xmlDoc) {
+        const cust = xmlDoc.getElementsByTagName(`customer`);
+
+        const list = document.getElementById(`cust`);
+
+        for (let index = 0; index < cust.length; index++) {
+          const element = cust[index];
+          const parsedCard = parseCard(element);
+
+          const ele = createCard(parsedCard);
+          list.appendChild(ele);
+        }
+      }
+
+      fetch("customers.xml")
+        .then((response) => response.text())
+        .then((str) => new DOMParser().parseFromString(str, "text/xml"))
+        .then(displayData);
+    </script>
+  </body>
+</html>
