@@ -1,3 +1,6 @@
+body{
+  margin:0;
+}
 .genre-card {
   max-width: 100%;
   overflow: hidden;
@@ -29,4 +32,19 @@ ol {
   display: flex;
   overflow: auto;
   max-width: 100%;
+}
+.genre-card > img {
+  border-radius: 50%;
+  margin: 5px;
+  border: none;
+}  
+h2{
+  font-family: calibri;
+}
+
+img{
+  border: solid black 1px;
+  margin: 2px;
+  padding: 0;
+  display: flex;
 }
