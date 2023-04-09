@@ -1,0 +1,47 @@
+body{
+    margin:0;
+  }
+  
+  .genre-card{
+    background-color: #4daf64;
+  }
+  
+  .genre-card > img{
+    display: block;
+    padding:3px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+  }
+  h2{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: calibri;
+    color: white;
+  }
+  
+  .genre-card > div {
+    margin: 0;
+  }
+  
+  .genre-card > div > ol{
+    padding: 0;
+    list-style: none;
+    display: flex;
+    overflow: scroll;
+  }
+  
+  .pimg{
+    border: solid black 1px;
+    margin: 2px;
+  }
+  .tracks{
+    list-style: none;
+    color: white;
+    margin: 0;
+    padding: 0;
+    justify-content: flex-start;
+    font-size: 12px;
+    font-family: cambria;
+  }
