@@ -1,0 +1,59 @@
+article {
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    background-color: #1c5c7c ;
+  }
+  #mainImage{
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  article:not(:last-child) {
+    margin-bottom: 15px;
+  }
+  form {
+    margin-bottom: 15px;
+  }
+
+  article > div {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  article > div > h2 {
+    color: rgb(0, 255, 0);
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    overflow: auto;
+    /* max-width: 100%; */
+   list-style: none;
+
+  }
+  li{
+    padding-left: 10px;
+  }
+
+  p{
+    font-size: 20px;
+    font-weight: bolder;
+  }
+  .tracks {
+    
+    color:  rgb(226, 40, 201);
+    padding: 0;
+  }
+  #radio_buttons {
+    margin: 10px;
+}
